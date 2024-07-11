@@ -1,0 +1,148 @@
+/* Estilos generales */
+
+:root {
+    --primary-color: #337ab7;
+    --primary-dark: #23527c;
+    --secondary-color: #666;
+    --background-color: #f2f2f2;
+    --text-color: #333;
+    --white: #fff;
+    --accent-color: #c22020;
+    --accent-dark: #980303;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+h4{
+    font-size: 20px;
+    color: var(--accent-dark)
+}
+label {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: var(--white);
+    border: 1px solid var(--secondary-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: inline-block;
+    margin: 20px;
+}
+
+/* Estilos para los botones */
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 8px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    color: var(--white);
+}
+
+.btn-danger {
+    background-color: var(--accent-color);
+    color: var(--white);
+    border: none;
+    padding: 8px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-danger:hover {
+    background-color: var(--accent-dark);
+    color: var(--white);
+}
+
+.btn-home {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    padding: 8px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.button-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px;
+    height: 120px;
+}
+
+
+.img-button {
+    width: 80px;
+    height: 80px;
+}
+.home-icon {
+    width: 20px;
+    height: 20px;
+}
+/*Tabla*/
+#tabla1 {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#tabla1 th,
+#v td {
+    padding: 8px;
+    border: 1px solid var(--white);
+}
+
+#tabla1 tr:nth-child(even) {
+    background-color: var(--background-color);
+}
+
+#tabla1 th {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: bold;
+}

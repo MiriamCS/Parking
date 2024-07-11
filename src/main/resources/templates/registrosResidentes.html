@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Informe de Pagos de Residentes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <a href="/" class="home-button">
+        <img src="/images/flecha-izquierda.png" alt="Home" class="home-icon">
+    </a>
+    <h1 class="mt-5">Informe de Pagos de Residentes</h1>
+
+    <form th:action="@{/informePagosResidentes}" method="post" class="mb-4">
+        <label for="nombre_fichero">Introduce el nombre del fichero</label>
+        <input type="text" id="nombre_fichero" name="fichero" class="form-control" required>
+        <button type="submit" class="btn-primary">Generar informe</button>
+    </form>
+    <h2>Estancias Residentes</h2>
+    <table id="tabla1">
+        <thead>
+        <tr>
+            <th>Matrícula</th>
+            <th>Tiempo estacionado (min.)</th>
+            <th>Cantidad a pagar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="residente : ${residentes}">
+            <td th:text="${residente.getMatricula()}"></td>
+            <td th:text="${residente.getTiempoEstacionado()}"></td>
+            <td th:text="${residente.getTiempoEstacionado() * precioMinutoResidentes}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

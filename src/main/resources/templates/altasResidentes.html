@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Altas Residentes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <a href="/" class="home-button">
+        <img src="/images/flecha-izquierda.png" alt="Home" class="home-icon">
+    </a>
+    <h1 class="mt-5">Dar de alta a vehículos de residentes</h1>
+    <form th:action="@{/altaResidente}" method="post" class="mb-4">
+        <label for="matricula_residente">Introduce la matrícula</label>
+        <input type="text" id="matricula_residente" name="matricula" class="form-control" required>
+        <button type="submit" class="btn-primary">Dar de alta</button>
+    </form>
+    <table id="tabla1">
+        <thead>
+        <tr>
+            <th>Matrículas de lo vehículos residentes</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="vResidente : ${vehiculosResidentes}">
+            <td th:text="${vResidente.getMatricula()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

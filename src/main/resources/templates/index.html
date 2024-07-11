@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Parking</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Parking</h1>
+    <form th:action="@{/enParking}" method="post" class="mb-4">
+        <button type="submit" class="btn-primary">
+            <div class="button-content">
+                <img th:src="@{/images/acceso.png}" class="img-button" alt="Image">
+                <span>Registrar Entradas y Salidas</span>
+            </div>
+        </button>
+    </form>
+
+    <form th:action="@{/addOficial}" method="post" class="mb-4">
+        <button type="submit" class="btn-primary">
+            <div class="button-content">
+                <img th:src="@{/images/coche-de-policia.png}" class="img-button" alt="Image">
+                <span>Dar de alta a un vehículo oficial</span>
+            </div>
+        </button>
+    </form>
+
+    <form th:action="@{/addResidente}" method="post" class="mb-4">
+        <button type="submit" class="btn-primary">
+            <div class="button-content">
+                <img th:src="@{/images/coche.png}" class="img-button" alt="Image">
+                <span>Dar de alta a residente</span>
+            </div>
+        </button>
+    </form>
+
+    <form th:action="@{/nuevoMes}" method="post" class="mb-4">
+        <button type="submit" class="btn-danger">
+            <div class="button-content">
+                <img th:src="@{/images/nuevo-mes.png}" class="img-button" alt="Image">
+                <span>Comienza el mes</span>
+            </div>
+        </button>
+    </form>
+
+    <form th:action="@{/pagosResidentes}" method="post" class="mb-4">
+        <button type="submit" class="btn-primary">
+            <div class="button-content">
+                <img th:src="@{/images/salario.png}" class="img-button" alt="Image">
+                <span>Generar informe de pago de residentess</span>
+            </div>
+        </button>
+    </form>
+
+</div>
+</body>
+</html>
+a
