@@ -77,14 +77,22 @@ public class ParkingService {
     }
 
 
-    public void darDeAltaVehiculoOficial(String matricula){
+    public boolean darDeAltaVehiculoOficial(String matricula){
+        if(vehiculoDAO.getMatriculasByTipo(TipoVehiculo.OFICIAL).contains(matricula)){
+            return false;
+        }
         Vehiculo vehiculo = new VehiculoOficial(matricula);
         vehiculoDAO.createVehiculo(vehiculo);
+        return true;
     }
 
-    public void darDeAltaVehiculoResidente(String matricula){
+    public boolean darDeAltaVehiculoResidente(String matricula){
+        if(vehiculoDAO.getMatriculasByTipo(TipoVehiculo.OFICIAL).contains(matricula)){
+            return false;
+        }
         Vehiculo vehiculo = new VehiculoResidente(matricula);
         vehiculoDAO.createVehiculo(vehiculo);
+        return true;
     }
 
     public void comienzaMes() {

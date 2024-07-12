@@ -15,6 +15,9 @@
         <label for="matricula_residente">Introduce la matrícula</label>
         <input type="text" id="matricula_residente" name="matricula" class="form-control" required pattern="[a-zA-Z0-9]{7}">
         <button type="submit" class="btn-primary">Dar de alta</button>
+        <div th:if="${done == false}" class="alert alert-info">
+            <h4>Este vehículo ya estaba dado de alta como residente</h4>
+        </div>
     </form>
     <table id="tabla1">
         <thead>
