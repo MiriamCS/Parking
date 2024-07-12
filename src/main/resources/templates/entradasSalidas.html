@@ -37,13 +37,11 @@
         <thead>
         <tr>
             <th>Matrícula</th>
-            <th>Tipo de vehículo</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="estancia : ${estanciasActuales}">
-            <td th:text="${estancia.getVehiculo().getMatricula()}"></td>
-            <td th:text="${estancia.getVehiculo().getTipo()}"></td>
+            <td th:text="${estancia.getVehiculoId()}"></td>
         </tr>
         </tbody>
     </table>

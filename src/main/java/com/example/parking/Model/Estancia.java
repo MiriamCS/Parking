@@ -1,18 +1,24 @@
 package com.example.parking.Model;
 
 public class Estancia {
-    private Vehiculo vehiculo;
+    private Long id;
+    private String vehiculo_id;
     private Long entrada;
     private Long salida;
 
-    public Estancia(Vehiculo vehiculo, Long entrada) {
-        this.vehiculo = vehiculo;
+    public Estancia() {
+    }
+    public Estancia(String vehiculo_id, Long entrada) {
+        this.vehiculo_id = vehiculo_id;
         this.entrada = convertToMinutes(entrada);
         this.salida = null;
     }
 
-    public Vehiculo getVehiculo() {
-        return vehiculo;
+    public Long getId() {
+        return id;
+    }
+    public String getVehiculoId() {
+        return vehiculo_id;
     }
 
     public Long getEntrada() {
@@ -21,6 +27,19 @@ public class Estancia {
 
     public Long getSalida() {
         return salida;
+    }
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setVehiculoId(String vehiculo_id) {
+        this.vehiculo_id = vehiculo_id;
+    }
+
+    public void setEntrada(Long entrada) {
+        this.entrada = entrada;
     }
 
     public void setSalida(Long salida) {
