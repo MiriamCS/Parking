@@ -14,15 +14,17 @@
     <h2 class="mt-5">Registrar la entrada de un vehículo</h2>
     <form th:action="@{/entrada}" method="post" class="mb-4">
         <label for="matricula_entrada">Introduce la matrícula</label>
-        <input type="text" id="matricula_entrada" name="matricula" class="form-control" required pattern="[a-zA-Z0-9]{7}">
-        <button type="submit" class="btn-primary">Registrar Entrada</button>
+        <input type="text" id="matricula_entrada" name="matricula"
+               class="form-control" required pattern="[a-zA-Z0-9]{7}"
+               title="Introduzca una matrícula válida"><button type="submit" class="btn-primary">Registrar Entrada</button>
     </form>
 
     <h2 class="mt-5">Registrar la salida de un vehículo</h2>
     <form th:action="@{/salida}" method="post" class="mb-4">
         <label for="matricula_salida">Introduce la matrícula</label>
-        <input type="text" id="matricula_salida" name="matricula" class="form-control" required pattern="[a-zA-Z0-9]{7}">
-        <button type="submit" class="btn-primary">Registrar Salida</button>
+        <input type="text" id="matricula_salida" name="matricula"
+               class="form-control" required pattern="[a-zA-Z0-9]{7}"
+               title="Introduzca una matrícula válida"><button type="submit" class="btn-primary">Registrar Salida</button>
         <div th:if="${precio == null && matricula != null}" class="alert alert-info">
             <h4>El vehículo <span th:text="${matricula}"></span> no tiene registrada una entrada</h4>
         </div>
@@ -37,11 +39,13 @@
         <thead>
         <tr>
             <th>Matrícula</th>
+            <th>Tipo</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="estancia : ${estanciasActuales}">
-            <td th:text="${estancia.getVehiculoId()}"></td>
+        <tr th:each="vehiculo : ${vehiculosActuales}">
+            <td th:text="${vehiculo.getMatricula()}"></td>
+            <td th:text="${vehiculo.getTipo()}"></td>
         </tr>
         </tbody>
     </table>

@@ -1,9 +1,11 @@
 package com.example.parking.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.parking.Model.TipoVehiculo;
 import com.example.parking.Model.Vehiculo;
+import com.example.parking.RowMapper.EstanciaRowMapper;
 import com.example.parking.RowMapper.VehiculoRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -40,5 +42,10 @@ public class VehiculoDAO {
     public void updateVehiculo(Vehiculo vehiculo) {
         String sql = "UPDATE vehiculo SET tipo = ?, tiempo_estacionado = ? WHERE id = ?";
         jdbcTemplate.update(sql, new Object[]{vehiculo.getTipo().name(), vehiculo.getTiempoEstacionado(), vehiculo.getMatricula()});
+    }
+
+    public List<Vehiculo> getVehiculosActuales(){
+        String sql = "SELECT v.* FROM estancia e LEFT JOIN vehiculo v ON e.matricula = v.matricula WHERE salida IS NULL;";
+        return jdbcTemplate.query(sql, new VehiculoRowMapper());
     }
 }

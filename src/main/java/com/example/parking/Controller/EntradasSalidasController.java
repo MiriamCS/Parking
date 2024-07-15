@@ -1,5 +1,6 @@
 package com.example.parking.Controller;
 
+import com.example.parking.Model.TipoVehiculo;
 import com.example.parking.Service.ParkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,7 @@ public class EntradasSalidasController {
 
     @GetMapping("/entradasSalidas")
     public String index(Model model) {
-        model.addAttribute("estanciasActuales", parkingService.getEstanciasActuales());
+        model.addAttribute("vehiculosActuales", parkingService.getVehiculosActuales());
         return "entradasSalidas";
     }
 

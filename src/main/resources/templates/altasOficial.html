@@ -13,7 +13,9 @@
     <h1 class="mt-5">Dar de alta a vehículos oficiales</h1>
     <form th:action="@{/altaOficial}" method="post" class="mb-4">
         <label for="matricula_oficial">Introduce la matrícula</label>
-        <input type="text" id="matricula_oficial" name="matricula" class="form-control" required pattern="[a-zA-Z0-9]{7}">
+        <input type="text" id="matricula_oficial" name="matricula"
+               class="form-control" required pattern="[a-zA-Z0-9]{7}"
+               title="Introduzca una matrícula válida">
         <button type="submit" class="btn-primary">Dar de alta</button>
         <div th:if="${done == false}" class="alert alert-info">
             <h4>Este vehículo ya estaba dado de alta como oficial</h4>

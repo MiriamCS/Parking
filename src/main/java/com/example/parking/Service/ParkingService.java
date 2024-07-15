@@ -38,6 +38,10 @@ public class ParkingService {
         return vehiculoDAO.getMatriculasByTipo(TipoVehiculo.OFICIAL);
     }
 
+    public List<Vehiculo> getVehiculosActuales(){
+        return  vehiculoDAO.getVehiculosActuales();
+    }
+
     public double getPrecioResidentes(){
         return PRECIO_RESIDENTE_MINUTO;
     }
