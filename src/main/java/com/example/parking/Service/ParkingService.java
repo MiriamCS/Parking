@@ -66,6 +66,7 @@ public class ParkingService {
 
             Vehiculo vehiculo = vehiculoDAO.getVehiculoByMatricula(matricula);
             vehiculo.setTiempoEstacionado(tiempoEstancia);
+            vehiculoDAO.updateVehiculo(vehiculo);
             if (vehiculo.getTipo().equals(TipoVehiculo.NO_RESIDENTE)) {
                 precio = tiempoEstancia * PRECIO_NO_RESIDENTE_MINUTO;
                 estanciaDAO.deleteEstancia(estanciaEncontrada.getId());
@@ -101,7 +102,7 @@ public class ParkingService {
     public void comienzaMes() {
         estanciaDAO.deleteAllEstancias();
         for (Vehiculo vehiculo : vehiculoDAO.getAllVehiculosByTipo(TipoVehiculo.RESIDENTE)) {
-            vehiculo.setTiempoEstacionado(0);
+            vehiculo.resetTiempoEstacionado();
             vehiculoDAO.updateVehiculo(vehiculo);
         }
     }

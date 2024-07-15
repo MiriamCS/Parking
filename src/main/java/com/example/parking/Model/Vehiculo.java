@@ -34,4 +34,8 @@ public abstract class Vehiculo {
     public void setTiempoEstacionado(long tiempoEstacionado) {
         this.tiempoEstacionado = tiempoEstacionado;
     }
+
+    public void resetTiempoEstacionado() {
+        this.tiempoEstacionado = 0;
+    }
 }
