@@ -107,6 +107,14 @@ public class ParkingService {
         }
     }
 
+    public Map<String, Integer> getNumEstanciasVehiculosOficial(){
+        Map<String, Integer> mapa = new HashMap<>();
+        for (String mOficial : vehiculoDAO.getMatriculasByTipo(TipoVehiculo.OFICIAL)){
+            mapa.put(mOficial, estanciaDAO.getEstanciasByVehiculoId(mOficial));
+        }
+        return mapa;
+    }
+
     public File generaInformePagosResidentes(String nombreFichero) {
         File file = new File(nombreFichero);
         try (PrintWriter writer = new PrintWriter(file)) {

@@ -25,11 +25,13 @@
         <thead>
         <tr>
             <th>Matrículas de los vehículos oficiales</th>
+            <th>Número de estancias este mes</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="mOficial : ${matriculasOficiales}">
-            <td th:text="${mOficial}"></td>
+        <tr th:each="mOficial : ${estanciasOficiales}">
+            <td th:text="${mOficial.getKey()}"></td>
+            <td th:text="${mOficial.getValue()}"></td>
         </tr>
         </tbody>
     </table>

@@ -25,9 +25,9 @@ public class EstanciaDAO {
         return jdbcTemplate.query(sql, new EstanciaRowMapper());
     }
 
-    public List<Estancia> getEstanciasByVehiculoId(String vehiculoId) {
-        String sql = "SELECT * FROM estancia WHERE matricula = ?";
-        return jdbcTemplate.query(sql, new Object[]{vehiculoId}, new EstanciaRowMapper());
+    public int getEstanciasByVehiculoId(String vehiculoId) {
+        String sql = "SELECT COUNT(*) FROM estancia WHERE matricula = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{vehiculoId}, Integer.class);
     }
 
     public Estancia getEstanciaActualByVehiculoId(String vehiculoId) {

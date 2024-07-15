@@ -16,8 +16,9 @@ public class AltasOficialesController {
 
     @GetMapping("/altasOficial")
     public String index(Model model) {
-        model.addAttribute("matriculasOficiales", parkingService.getMatriculasOficiales());
+        model.addAttribute("estanciasOficiales", parkingService.getNumEstanciasVehiculosOficial());
         return "altasOficial";
+
     }
 
     @PostMapping("/altaOficial")
