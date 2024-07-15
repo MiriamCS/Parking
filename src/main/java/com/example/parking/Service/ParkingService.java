@@ -33,11 +33,6 @@ public class ParkingService {
     public List<Vehiculo> getVehiculosResidentes(){
         return vehiculoDAO.getAllVehiculosByTipo(TipoVehiculo.RESIDENTE);
     }
-
-    public List<String> getMatriculasOficiales(){
-        return vehiculoDAO.getMatriculasByTipo(TipoVehiculo.OFICIAL);
-    }
-
     public List<Vehiculo> getVehiculosActuales(){
         return  vehiculoDAO.getVehiculosActuales();
     }
@@ -46,14 +41,18 @@ public class ParkingService {
         return PRECIO_RESIDENTE_MINUTO;
     }
 
-    public void registrarEntrada(String matricula) {
+    public Estancia registrarEntrada(String matricula) {
         Vehiculo vehiculo = vehiculoDAO.getVehiculoByMatricula(matricula);
         if (vehiculo == null) {
             vehiculo = new VehiculoNoResidente(matricula);
             vehiculoDAO.createVehiculo(vehiculo);
         }
-        Estancia estancia = new Estancia(matricula, System.currentTimeMillis());
-        estanciaDAO.createEstancia(estancia);
+        if (estanciaDAO.getEstanciaActualByVehiculoId(matricula) == null){
+            Estancia estancia = new Estancia(matricula, System.currentTimeMillis());
+            estanciaDAO.createEstancia(estancia);
+            return estancia;
+        }
+        return null;
     }
 
 

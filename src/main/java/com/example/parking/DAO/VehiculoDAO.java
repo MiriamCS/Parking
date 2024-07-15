@@ -40,7 +40,7 @@ public class VehiculoDAO {
     }
 
     public void updateVehiculo(Vehiculo vehiculo) {
-        String sql = "UPDATE vehiculo SET tipo = ?, tiempo_estacionado = ? WHERE id = ?";
+        String sql = "UPDATE vehiculo SET tipo = ?, tiempo_estacionado = ? WHERE matricula = ?";
         jdbcTemplate.update(sql, new Object[]{vehiculo.getTipo().name(), vehiculo.getTiempoEstacionado(), vehiculo.getMatricula()});
     }
 

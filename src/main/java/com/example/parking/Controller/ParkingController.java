@@ -21,9 +21,14 @@ public class ParkingController {
         return "index";
     }
 
-    @PostMapping("/enParking")
-    public String registrosActuales() {
-        return "redirect:/entradasSalidas";
+    @PostMapping("/entradaParking")
+    public String registrosEntrada() {
+        return "redirect:/entradasParking";
+    }
+
+    @PostMapping("/salidaParking")
+    public String registrosSalida() {
+        return "redirect:/salidasParking";
     }
 
     @PostMapping("/addOficial")

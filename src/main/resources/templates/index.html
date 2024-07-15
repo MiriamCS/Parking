@@ -8,11 +8,20 @@
 <body>
 <div class="container">
     <h1 class="mt-5">Parking</h1>
-    <form th:action="@{/enParking}" method="post" class="mb-4">
+    <form th:action="@{/entradaParking}" method="post" class="mb-4">
         <button type="submit" class="btn-primary">
             <div class="button-content">
                 <img th:src="@{/images/acceso.png}" class="img-button" alt="Image">
-                <span>Registrar Entradas y Salidas</span>
+                <span>Registrar Entradas</span>
+            </div>
+        </button>
+    </form>
+
+    <form th:action="@{/salidaParking}" method="post" class="mb-4">
+        <button type="submit" class="btn-primary">
+            <div class="button-content">
+                <img th:src="@{/images/acceso.png}" class="img-button" alt="Image">
+                <span>Registrar Salidas</span>
             </div>
         </button>
     </form>
