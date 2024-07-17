@@ -1,5 +1,6 @@
 package com.example.parking.Controller;
 
+import com.example.parking.Model.TipoArchivo;
 import com.example.parking.Service.ParkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -28,9 +29,22 @@ public class GenerarInformeController {
         return "registrosResidentes";
     }
 
+
     @PostMapping("/informePagosResidentes")
-    public ResponseEntity<byte[]> generaInformePagosResidentes(@RequestParam String fichero) throws IOException {
-        File file = parkingService.generaInformePagosResidentes(fichero);
+    public ResponseEntity<byte[]> generaInformePagosResidentes(@RequestParam String fichero, @RequestParam("format") String format) throws IOException {
+        File file;
+        if (format == null || format.isEmpty()) {
+            return ResponseEntity.badRequest().body("No se ha seleccionado un formato".getBytes());
+        }
+        if (format.equals("txt")) {
+            file = parkingService.generaInformePagosResidentes(fichero, TipoArchivo.txt);
+        } else if (format.equals("csv")) {
+            file = parkingService.generaInformePagosResidentes(fichero, TipoArchivo.csv);
+        } else if (format.equals("pdf")) {
+            file = parkingService.generaInformePagosResidentes(fichero, TipoArchivo.pdf);
+        } else {
+            return ResponseEntity.badRequest().body("Formato no válido".getBytes());
+        }
         byte[] bytes = Files.readAllBytes(file.toPath());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);

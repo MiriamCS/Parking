@@ -15,6 +15,12 @@
     <form th:action="@{/informePagosResidentes}" method="post" class="mb-4">
         <label for="nombre_fichero">Introduce el nombre del fichero</label>
         <input type="text" id="nombre_fichero" name="fichero" class="form-control" required>
+        <input type="radio" id="txt" name="format" value="txt">
+        <label for="txt">TXT</label>
+        <input type="radio" id="csv" name="format" value="csv">
+        <label for="csv">CSV</label>
+        <input type="radio" id="pdf" name="format" value="pdf">
+        <label for="pdf">PDF</label>
         <button type="submit" class="btn-primary">Generar informe</button>
     </form>
     <h2>Estancias Residentes</h2>

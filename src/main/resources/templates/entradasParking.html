@@ -17,8 +17,8 @@
         <input type="text" id="matricula_entrada" name="matricula"
                class="form-control" required pattern="[A-Z0-9]{7}"
                title="Introduzca una matrícula válida"><button type="submit" class="btn-primary">Registrar Entrada</button>
-        <div th:if="${estancia == null && matricula != null}" class="alert alert-info">
-            <h4>El vehículo ya tiene registrada una entrada</h4>
+        <div th:if="${error != null}" class="alert alert-danger">
+            <h4 th:text="${error}"></h4>
         </div>
     </form>
 

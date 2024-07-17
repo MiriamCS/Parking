@@ -3,12 +3,15 @@ package com.example.parking.Service;
 import com.example.parking.DAO.EstanciaDAO;
 import com.example.parking.DAO.VehiculoDAO;
 import com.example.parking.Model.*;
+import com.itextpdf.layout.properties.HorizontalAlignment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import java.io.*;
 import java.util.*;
 
 @Service
@@ -82,7 +85,7 @@ public class ParkingService {
 
 
     public boolean darDeAltaVehiculoOficial(String matricula){
-        if(vehiculoDAO.getMatriculasByTipo(TipoVehiculo.OFICIAL).contains(matricula)){
+        if(vehiculoDAO.getMatriculasByTipo(TipoVehiculo.OFICIAL).contains(matricula) || vehiculoDAO.getMatriculasByTipo(TipoVehiculo.RESIDENTE).contains(matricula)){
             return false;
         }
         Vehiculo vehiculo = new VehiculoOficial(matricula);
@@ -91,7 +94,7 @@ public class ParkingService {
     }
 
     public boolean darDeAltaVehiculoResidente(String matricula){
-        if(vehiculoDAO.getMatriculasByTipo(TipoVehiculo.OFICIAL).contains(matricula)){
+        if(vehiculoDAO.getMatriculasByTipo(TipoVehiculo.RESIDENTE).contains(matricula) || vehiculoDAO.getMatriculasByTipo(TipoVehiculo.OFICIAL).contains(matricula)){
             return false;
         }
         Vehiculo vehiculo = new VehiculoResidente(matricula);
@@ -115,15 +118,77 @@ public class ParkingService {
         return mapa;
     }
 
-    public File generaInformePagosResidentes(String nombreFichero) {
-        File file = new File(nombreFichero);
+    public File generaInformePagosResidentes(String nombreFichero, TipoArchivo tipoArchivo) {
+        File file = new File(nombreFichero+ "." + tipoArchivo.name());
+        if(tipoArchivo.equals(TipoArchivo.txt)){
+            file = generaInformeTxt(file);
+        } else if (tipoArchivo.equals(TipoArchivo.csv)) {
+            file = generaInformeCsv(file);
+        } else if (tipoArchivo.equals(TipoArchivo.pdf)) {
+            file = generaInformePdf(file);
+        }else{
+            System.out.println("Invalid file type. Please try again.");
+            return null;
+        }
+        return file;
+    }
+
+    public File generaInformeTxt(File file) {
         try (PrintWriter writer = new PrintWriter(file)) {
             writer.println("Matrícula\tTiempo estacionado (min.)\tCantidad a pagar");
             for (Vehiculo vehiculo : vehiculoDAO.getAllVehiculosByTipo(TipoVehiculo.RESIDENTE)) {
                 double importe = (double) vehiculo.getTiempoEstacionado()* PRECIO_RESIDENTE_MINUTO;
                 writer.println(vehiculo.getMatricula() + "\t\t\t" + vehiculo.getTiempoEstacionado()+ "\t\t\t\t" + importe);
             }
-        } catch (FileNotFoundException e) {
+        }catch (FileNotFoundException e) {
+            System.out.println("Error al generar el informe: " + e.getMessage());
+            return null;
+        }
+        System.out.println("Informe generado correctamente.");
+        return file;
+    }
+    public File generaInformeCsv(File file) {
+        try (PrintWriter writer = new PrintWriter(file)) {
+            writer.println("Matrícula;Tiempo estacionado (min.);Cantidad a pagar");
+            for (Vehiculo vehiculo : vehiculoDAO.getAllVehiculosByTipo(TipoVehiculo.RESIDENTE)) {
+                double importe = (double) vehiculo.getTiempoEstacionado() * PRECIO_RESIDENTE_MINUTO;
+                writer.println(vehiculo.getMatricula() + ";" + vehiculo.getTiempoEstacionado() + ";" + importe);
+            }
+        }catch (FileNotFoundException e) {
+            System.out.println("Error al generar el informe: " + e.getMessage());
+            return null;
+        }
+        System.out.println("Informe generado correctamente.");
+        return file;
+    }
+    public File generaInformePdf(File file) {
+        try (PdfWriter writer = new PdfWriter(file)) {
+            PdfDocument pdfDoc = new PdfDocument(writer);
+            Document doc = new Document(pdfDoc);
+
+            Paragraph header = new Paragraph("Informe de vehículos residentes");
+            header.setHorizontalAlignment(HorizontalAlignment.CENTER);
+            doc.add(header);
+
+            float[] columnWidths = {5, 5, 5};
+            Table table = new Table(columnWidths);
+            table.setWidth(500);
+
+            table.addCell("Matrícula");
+            table.addCell("Tiempo estacionado (min.)");
+            table.addCell("Cantidad a pagar");
+
+            for (Vehiculo vehiculo : vehiculoDAO.getAllVehiculosByTipo(TipoVehiculo.RESIDENTE)) {
+                double importe = (double) vehiculo.getTiempoEstacionado() * PRECIO_RESIDENTE_MINUTO;
+                table.addCell(vehiculo.getMatricula());
+                table.addCell(String.valueOf(vehiculo.getTiempoEstacionado()));
+                table.addCell(String.valueOf(importe));
+            }
+
+            doc.add(table);
+
+            doc.close();
+        } catch (Exception e) {
             System.out.println("Error al generar el informe: " + e.getMessage());
             return null;
         }

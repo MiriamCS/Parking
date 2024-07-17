@@ -24,8 +24,9 @@ public class EntradasController {
     @PostMapping("/entrada")
     public String registrarEntrada(@RequestParam String matricula, RedirectAttributes redirectAttributes) {
         Estancia estancia = parkingService.registrarEntrada(matricula);
-        redirectAttributes.addFlashAttribute("estancia", estancia);
-        redirectAttributes.addFlashAttribute("matricula", matricula);
+        if (estancia == null) {
+            redirectAttributes.addFlashAttribute("error", "El vehículo ya tiene una entrada registrada");
+        }
         return "redirect:/entradasParking";
     }
 }
